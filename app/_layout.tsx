@@ -1,6 +1,9 @@
+import "@/global.css";
+
 import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
-import { useEffect } from "react";
+import { HeroUINativeProvider } from "heroui-native";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 SplashScreen.setOptions({
   duration: 1000,
@@ -9,13 +12,11 @@ SplashScreen.setOptions({
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
-  useEffect(() => {
-    const timer = setTimeout(async () => {
-      await SplashScreen.hideAsync();
-    }, 2000); // 2 seconds
-
-    return () => clearTimeout(timer);
-  }, []);
-
-  return <Stack />;
+  return (
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <HeroUINativeProvider>
+        <Stack />
+      </HeroUINativeProvider>
+    </GestureHandlerRootView>
+  );
 }
